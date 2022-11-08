@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="main-container">
+    <div class="libraries-list">
+        <b>Create New Library</b>
+        <br><br>
+        <div class="add-search">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Add"/>
+                <button><a href="{% url 'libraries' %}">Back</a></button>
+            </form>
+        </div>
+        <div>
+            {% for library in libraries %}
+                <p>
+                    <a href="{% url 'library_open' library.name %}">{{ library.name }}</a>
+                    <a href="{% url 'library_update' library.id %}">Edit</a>
+                    <a href="{% url 'library_delete' library.id %}">Delete</a>
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="wish-list">
+
+    </div>
+
+    <div class="finished-list">
+
+    </div>
+</div>
+
+{% endblock %}

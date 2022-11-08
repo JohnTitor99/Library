@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Library</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1 class="main-title"><a href="{% url 'libraries' %}">My Libraries</a></h1>
+        {% if not request.user.is_authenticated %}
+            <p class="username-logout"><a href="{% url 'login' %}">Login</a></p>
+        {% else %}
+            <p class="username-logout"><a href="">{{ request.user }}</a> <a href="{% url 'logout' %}">Logout</a></p>
+        {% endif %}
+        <hr>
+        
+        {% block content %}
+        
+
+
+
+
+        {% endblock %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    </body>
+</html>

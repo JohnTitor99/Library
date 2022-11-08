@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="main-container">
+    <div class="libraries-list">
+        <div class="add-search">
+            <a class="list-header">Libraries</a>
+            <button><a href="{% url 'library_create' %}">Add</a></button>
+            <button><a href="">Search</a></button>
+        </div>
+        {% for library in libraries %}
+            {% if lib_update != library.id %}
+                <p>
+                    <a href="{% url 'library_open' library.name %}">{{ library.name }}</a>
+                    <a href="{% url 'library_update' library.id %}">Edit</a>
+                    <a href="{% url 'library_delete' library.id %}">Delete</a>
+                </p>
+            {% else %}
+                <p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="submit" value="Update"/>
+                        <a href="{% url 'libraries' %}">Back</a>
+                    </form>
+                </p>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="wish-list">
+
+    </div>
+
+    <div class="finished-list">
+
+    </div>
+</div>
+
+{% endblock %}

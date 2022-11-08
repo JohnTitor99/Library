@@ -1,0 +1,33 @@
+a {
+    text-decoration: none;
+}
+
+.main-title {
+    text-align: center;
+}
+
+.username-logout {
+    text-align: center;
+}
+
+
+.main-container {
+    display: grid;
+    grid-template-columns: 33% 33% 33% ;
+}
+
+.list-header {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.wish-list {
+    position: realtive;
+    text-align: center;
+}
+
+.finished-list {
+    position: realtive;
+    text-align: right;
+}
+

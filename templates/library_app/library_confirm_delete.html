@@ -1,0 +1,6 @@
+<form method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ library.name }}"</p>
+    <input type="submit" value="Delete"/>
+    <a href="{% url 'libraries' %}">Go back</a>
+</form>
