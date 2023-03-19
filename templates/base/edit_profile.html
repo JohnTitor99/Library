@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<center class="mt-5">
+    <div class="login">
+        <h2>Edit Profile</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <br>
+            <input type="submit" class="btn btn-primary mt-3" value="Save">
+            <a href="{% url 'libraries' %}" role="button"class="btn btn-success mt-3">Back</a>
+        </form>
+    </div>
+</center>
+
+{% endblock %}

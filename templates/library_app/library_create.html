@@ -3,36 +3,48 @@
 
 {% block content %}
 
-<div class="main-container">
-    <div class="libraries-list">
-        <b>Create New Library</b>
-        <br><br>
-        <div class="add-search">
-            <form method="POST">
-                {% csrf_token %}
-                {{ form }}
-                <input type="submit" value="Add"/>
-                <button><a href="{% url 'libraries' %}">Back</a></button>
-            </form>
-        </div>
+<div class="w-100 row justify-content-md-center text-center">
+    <div class="col col-lg-3 border-end">
+        <p class="h2 text-decoration-none">Libraries</p>
+        <hr>
         <div>
+            <div class="pb-1">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" class="btn btn-primary btn-sm mb-1" value="Add"/>
+                    <a href="{% url 'libraries' %}" role="button"class="btn btn-success btn-sm mb-1">Back</a>
+                </form>
+            </div>
             {% for library in libraries %}
-                <p>
-                    <a href="{% url 'library_open' library.name %}">{{ library.name }}</a>
-                    <a href="{% url 'library_update' library.id %}">Edit</a>
-                    <a href="{% url 'library_delete' library.id %}">Delete</a>
-                </p>
+                {% if library.name == lib_name %}
+                    <p class="pb-2">
+                        <a href="{% url 'library_open' library.name %}" class="h3 text-decoration-none float-start"><b>{{ library.name }} ←</b></a>
+                        <a href="{% url 'library_delete' library.id %}" class="btn btn-danger btn-sm float-end">X</a>
+                        <a href="{% url 'library_update' library.id %}" class="btn btn-warning btn-sm float-end">Edit</a>
+                        <br>
+                    </p>
+                {% else %}
+                    <p class="pb-2">
+                        <a href="{% url 'library_open' library.name %}" class="h4 text-decoration-none float-start">{{ library.name }}</a>
+                        <a href="{% url 'library_delete' library.id %}" class="btn btn-danger btn-sm float-end">X</a>
+                        <a href="{% url 'library_update' library.id %}" class="btn btn-warning btn-sm float-end">Edit</a>
+                        <br>
+                    </p>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
 
-    <div class="wish-list">
+    <div class="col col-lg-3">
 
     </div>
 
-    <div class="finished-list">
+    <div class="col col-lg-3">
 
     </div>
 </div>
 
 {% endblock %}
+
+

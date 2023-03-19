@@ -53,7 +53,7 @@ class LibraryCreate(generic.CreateView):
             form_class = self.get_form_class()
 
         form = super().get_form(form_class)
-        form.fields['name'].widget.attrs = {'placeholder': 'Name'} # add attributes to a field
+        form.fields['name'].widget.attrs = {'placeholder': 'Name', 'class': 'create-form-input'} # add attributes to a field
         form.fields['name'].label = "" # change the label
         return form
 
@@ -89,6 +89,7 @@ class LibraryUpdate(generic.UpdateView):
             form_class = self.get_form_class()
 
         form = super().get_form(form_class)
+        form.fields['name'].widget.attrs = {'class': 'library-update-form-input'} # add attributes to a field
         form.fields['name'].label = "" # change the label
         return form
 

@@ -1,33 +1,42 @@
-a {
-    text-decoration: none;
+.main-hr {
+    width: 1125px;
+    margin-right: 20px;
 }
 
-.main-title {
-    text-align: center;
+.login {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid grey;
 }
 
-.username-logout {
-    text-align: center;
+.userprofile-input-field {
+    width: 250px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-
-.main-container {
-    display: grid;
-    grid-template-columns: 33% 33% 33% ;
+.create-form-input {
+    width: 258px;
 }
 
-.list-header {
-    font-size: 30px;
-    font-weight: bold;
+.update-form-input {
+    width: 258px;
+    margin-top: 5px;
 }
 
-.wish-list {
-    position: realtive;
-    text-align: center;
+.library-update-form-input {
+    width: 258px;
+    margin-bottom: 18px;
 }
 
-.finished-list {
-    position: realtive;
-    text-align: right;
+.lib-submit-delete {
+    margin-top: 100px;
 }
 
+.search-input {
+    width: 241px;
+}
+
+.modal-content {
+    margin-top: 150px;
+}

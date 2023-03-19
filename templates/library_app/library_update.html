@@ -3,40 +3,44 @@
 
 {% block content %}
 
-<div class="main-container">
-    <div class="libraries-list">
-        <div class="add-search">
-            <a class="list-header">Libraries</a>
-            <button><a href="{% url 'library_create' %}">Add</a></button>
-            <button><a href="">Search</a></button>
-        </div>
-        {% for library in libraries %}
-            {% if lib_update != library.id %}
-                <p>
-                    <a href="{% url 'library_open' library.name %}">{{ library.name }}</a>
-                    <a href="{% url 'library_update' library.id %}">Edit</a>
-                    <a href="{% url 'library_delete' library.id %}">Delete</a>
-                </p>
-            {% else %}
-                <p>
+<div class="w-100 row justify-content-md-center text-center">
+    <div class="col col-lg-3 border-end">
+        <p class="h2 text-decoration-none">Libraries</p>
+        <hr>
+        <div>
+            <a href="{% url 'library_create' %}" class="btn btn-primary btn-sm mb-2" role="button">Add New</a>
+            <a href="{% url 'lib_search' %}" class="btn btn-primary btn-sm mb-2" role="button">Search</a>
+
+            {% for library in libraries %}
+                {% if lib_update != library.id %}
+                    <p class="pb-2">
+                        <a href="{% url 'library_open' library.name %}" class="h4 text-decoration-none float-start">{{ library.name }}</a>
+                        <a href="{% url 'library_delete' library.id %}" class="btn btn-danger btn-sm float-end">X</a>
+                        <a href="{% url 'library_update' library.id %}" class="btn btn-warning btn-sm float-end">Edit</a>
+                        <br>
+                    </p>
+                {% else %}
                     <form method="POST">
                         {% csrf_token %}
                         {{ form }}
-                        <input type="submit" value="Update"/>
-                        <a href="{% url 'libraries' %}">Back</a>
+                        <input type="submit" class="btn btn-primary btn-sm mb-1" value="Upd"/>
+                        <a href="{% url 'libraries' %}" role="button"class="btn btn-success btn-sm mb-1">Back</a>
                     </form>
-                </p>
-            {% endif %}
-        {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 
-    <div class="wish-list">
+    <div class="col col-lg-3">
 
     </div>
 
-    <div class="finished-list">
+    <div class="col col-lg-3">
 
     </div>
 </div>
 
 {% endblock %}
+
+
+

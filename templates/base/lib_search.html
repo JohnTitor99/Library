@@ -10,8 +10,13 @@
         </div>
         <hr>
         <div>
-            <a href="{% url 'library_create' %}" class="btn btn-primary btn-sm mb-2" role="button">Add New</a>
-            <a href="{% url 'lib_search' %}" class="btn btn-primary btn-sm mb-2" role="button">Search</a>
+            <div class="pb-1">
+                <form method="GET">
+                    <input type="text" name="q" class="search-input mb-1" value="{{ search_input }}"/>
+                    <input type="submit" class="btn btn-sm btn-primary mb-1" vlaue="Search"/>
+                    <a href="{% url 'libraries' %}" role="button"class="btn btn-success btn-sm mb-1">Back</a>
+                </form>
+            </div>
             {% for library in libraries %}
                 <p class="pb-2">
                     <a href="{% url 'library_open' library.name %}" class="h4 text-decoration-none float-start">{{ library.name }}</a>

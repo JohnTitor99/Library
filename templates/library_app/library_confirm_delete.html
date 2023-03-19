@@ -1,6 +1,16 @@
-<form method="POST">
-    {% csrf_token %}
-    <p>Are you sure you want to delete "{{ library.name }}"</p>
-    <input type="submit" value="Delete"/>
-    <a href="{% url 'libraries' %}">Go back</a>
-</form>
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<center class="lib-submit-delete">
+    <form method="POST">
+        {% csrf_token %}
+        <a class="h4 text-decoration-none">Are you sure you want to delete "{{ library.name }}"</a>
+        <br>
+        <input type="submit" class="btn btn-danger mt-3" value="Delete"/>
+        <a href="{% url 'libraries' %}" role="button"class="btn btn-success mt-3">Go Back</a>
+    </form>
+</center>
+
+{% endblock %}

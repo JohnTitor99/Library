@@ -1,0 +1,28 @@
+<!-- Modal -->
+<div class="modal fade" id="finishedModal{{ finished.id }}" tabindex="-1" aria-labelledby="finishedModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="finishedModalLabel">Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <a class="h6 text-decoration-none">{{ finished.name }}</a>
+                <br><br>
+                <small >Created: {{ finished.created }}</small>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'finished_update' lib_name finished.id %}" class="d-block btn btn-warning float-end">Edit</a>
+
+                <!-- delete a finished -->
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="finished_id" value="{{ finished.id }}"/>
+                    <input class="d-block btn btn-danger float-end" type="submit" name="finished-delete" value="Delete">
+                </form>
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

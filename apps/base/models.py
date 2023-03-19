@@ -14,7 +14,7 @@ class UserProfile(models.Model):
 
 class Library(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50, null=True, blank=True)
+    name = models.CharField(max_length=22, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -27,7 +27,7 @@ class Library(models.Model):
 class Wish(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     library = models.ForeignKey(Library, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30, null=True, blank=True)
+    name = models.CharField(max_length=56, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -40,7 +40,7 @@ class Wish(models.Model):
 class Finished(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     library = models.ForeignKey(Library, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30, null=True, blank=True)
+    name = models.CharField(max_length=56, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

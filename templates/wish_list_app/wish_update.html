@@ -3,59 +3,70 @@
 
 {% block content %}
 
-<div class="main-container">
-    <div class="libraries-list">
-        <div class="add-search">
-            <a class="list-header">Libraries</a>
-            <button><a href="{% url 'library_create' %}">Add</a></button>
-            <button><a href="">Search</a></button>
-        </div>
+<div class="w-100 row justify-content-md-center text-center">
+    <div class="col col-lg-3">
+        <p class="h2 text-decoration-none">Libraries</p>
+        <hr>
         <div>
+            <a href="{% url 'library_create' %}" class="btn btn-primary btn-sm mb-2" role="button">Add New</a>
+            <a href="{% url 'lib_search' %}" class="btn btn-primary btn-sm mb-2" role="button">Search</a>
             {% for library in libraries %}
-                <p>
-                    <a href="{% url 'library_open' library.name %}">{{ library.name }}</a>
-                    <a href="{% url 'library_update' library.id %}">Edit</a>
-                    <a href="{% url 'library_delete' library.id %}">Delete</a>
-                </p>
+                {% if library.name == lib_name %}
+                    <p class="pb-2">
+                        <a href="{% url 'library_open' library.name %}" class="h3 text-decoration-none float-start"><b>{{ library.name }} ←</b></a>
+                        <a href="{% url 'library_delete' library.id %}" class="btn btn-danger btn-sm float-end">X</a>
+                        <a href="{% url 'library_update' library.id %}" class="btn btn-warning btn-sm float-end">Edit</a>
+                        <br>
+                    </p>
+                {% else %}
+                    <p class="pb-2">
+                        <a href="{% url 'library_open' library.name %}" class="h4 text-decoration-none float-start">{{ library.name }}</a>
+                        <a href="{% url 'library_delete' library.id %}" class="btn btn-danger btn-sm float-end">X</a>
+                        <a href="{% url 'library_update' library.id %}" class="btn btn-warning btn-sm float-end">Edit</a>
+                        <br>
+                    </p>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
 
-    <div class="wish-list">
-        <div class="add-search">
-            <a class="list-header">Wish List</a>
-            <button><a href="{% url 'wish_create' lib_name %}">Add</a></button>
-            <button><a href="">Search</a></button>
-        </div>
+    <div class="col col-lg-3 border-start border-end">
+        <p class="h2 text-decoration-none">Wish List</p>
+        <hr>
         <div>
+            <a href="{% url 'wish_create' lib_name %}" class="btn btn-primary btn-sm mb-2" role="button">Add New</a>
             {% if wish_list %}
                 {% for wish in wish_list %}
                     {% if wish_update != wish.id %}
-                        <p>
-                            <a href="">{{ wish.name }}</a>
-                            <a href="{% url 'wish_update' lib_name wish.id %}">Edit</a>
-                            <!-- delete a wish -->
-                            <form method="POST" action="{% url 'library_open' lib_name %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="wish_id" value="{{ wish.id }}"/>
-                                <input type="submit" value="Delete" name="wish-delete"/>
-                            </form>
+                        <p class="position-absolute p-2">
+                        <!-- Button trigger modal -->
+                        <a role="button" class="h6 text-decoration-none float-start" data-bs-toggle="modal"data-bs-target="#exampleModal{{ wish.id }}">
+                            {{ wish.name | slice:":25"}}
+                        </a>
+                        {% include 'wish_dropdown.html' %}
                             <!-- move to finished -->
-                            <form method="POST" action="{% url 'library_open' lib_name %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="wish_id" value="{{ wish.id }}"/>
-                                <input type="submit" value="→" name="move-to-finished"/>
-                            </form>
-                        </p>
-                    {% else %}
-                        <p>
                             <form method="POST">
                                 {% csrf_token %}
-                                {{ form }}
-                                <input type="submit" value="Update"/>
-                                <a href="{% url 'library_open' lib_name %}">Back</a>
+                                <input type="hidden" name="wish_id" value="{{ wish.id }}"/>
+                                <input class="d-block mt-1 btn btn-light btn-sm float-end" type="submit" name="move-to-finished" value="→">
                             </form>
+                            <!-- delete a wish -->
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="wish_id" value="{{ wish.id }}"/>
+                                <input class="d-block mt-1 btn btn-danger btn-sm float-end" type="submit" name="wish-delete" value="X">
+                            </form>
+
+                            <a href="{% url 'wish_update' lib_name wish.id %}" class="d-block mt-1 btn btn-warning btn-sm float-end">Edit</a>
+                            <br>
                         </p>
+                    {% else %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form }}
+                            <input type="submit" class="btn btn-primary btn-sm mb-1" value="Upd"/>
+                            <a href="{% url 'library_open' lib_name %}" role="button"class="btn btn-success btn-sm mb-1">Back</a>
+                        </form>
                     {% endif %}
                 {% endfor %}
             {% else %}
@@ -64,24 +75,23 @@
         </div>
     </div>
 
-    <div class="finished-list">
-        <div class="add-search">
-            <a class="list-header">Finished</a>
-            <button><a href="{% url 'finished_create' lib_name %}">Add</a></button>
-            <button><a href="">Search</a></button>
-        </div>
+    <div class="col col-lg-3">
+        <p class="h2 text-decoration-none">Finished</p>
+        <hr>
         <div>
+            <a href="{% url 'finished_create' lib_name %}" class="btn btn-primary btn-sm mb-2" role="button">Add New</a>
             {% if finished_list %}
                 {% for finished in finished_list %}
-                    <p>
-                        <a href="">{{ finished.name }}</a>
-                        <a href="{% url 'finished_update' lib_name finished.id %}">Edit</a>
+                    <p class="position-absolute p-2">
+                        <a class="h6 text-decoration-none float-start">{{ finished.name }}</a>
                         <!-- delete finished -->
-                        <form method="POST" action="{% url 'library_open' lib_name %}">
+                        <form method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="finished_id" value="{{ finished.id }}"/>
-                            <input type="submit" value="Delete" name="finished-delete"/>
+                            <input class="d-block mt-1 btn btn-danger btn-sm float-end" type="submit" name="finished-delete" value="X">
                         </form>
+                        <a href="{% url 'finished_update' lib_name finished.id %}" class="d-block mt-1 btn btn-warning btn-sm float-end">Edit</a>
+                        <br>
                     </p>
                 {% endfor %}
             {% else %}
@@ -92,3 +102,32 @@
 </div>
 
 {% endblock %}
+
+
+{% if wish_update != wish.id %}
+<p>
+    <a href="">{{ wish.name }}</a>
+    <a href="{% url 'wish_update' lib_name wish.id %}">Edit</a>
+    <!-- delete a wish -->
+    <form method="POST" action="{% url 'library_open' lib_name %}">
+        {% csrf_token %}
+        <input type="hidden" name="wish_id" value="{{ wish.id }}"/>
+        <input type="submit" value="Delete" name="wish-delete"/>
+    </form>
+    <!-- move to finished -->
+    <form method="POST" action="{% url 'library_open' lib_name %}">
+        {% csrf_token %}
+        <input type="hidden" name="wish_id" value="{{ wish.id }}"/>
+        <input type="submit" value="→" name="move-to-finished"/>
+    </form>
+</p>
+{% else %}
+<p>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Update"/>
+        <a href="{% url 'library_open' lib_name %}">Back</a>
+    </form>
+</p>
+{% endif %}

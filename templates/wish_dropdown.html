@@ -1,0 +1,35 @@
+<!-- Modal -->
+<div class="modal fade" id="wishModal{{ wish.id }}" tabindex="-1" aria-labelledby="wishModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="wishModalLabel">Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <a class="h6 text-decoration-none">{{ wish.name }}</a>
+                <br><br>
+                <small >Created: {{ wish.created }}</small>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'wish_update' lib_name wish.id %}" class="d-block btn btn-warning float-end">Edit</a>
+
+                <!-- delete a wish -->
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="wish_id" value="{{ wish.id }}"/>
+                    <input class="d-block btn btn-danger float-end" type="submit" name="wish-delete" value="Delete">
+                </form>
+
+                <!-- move to finished -->
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="wish_id" value="{{ wish.id }}"/>
+                    <input class="d-block btn btn-info float-end" type="submit" name="move-to-finished" value="Move to Finished">
+                </form>
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
