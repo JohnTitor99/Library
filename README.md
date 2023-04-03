@@ -6,7 +6,7 @@ Hi, this is my first fully-functional django project with bootstrap.
 
 ## Introduction
 
-It's a training project that i've made at the beginning my way becoming a django developer. In this particular project i've learned what are class based views in Django. When you sign up, you can create any topics here, for example 'Books', and save there books that you wanna read in the future or books that you've already read.
+It's a training project that i've made at the beginning my way becoming a django developer using class based views. In this particular project i've learned what are class based views in Django. When you sign up, you can create any topics here, for example 'Books', and save there books that you wanna read in the future or books that you've already read.
 ## Technologies
 
 - Python 3.10.6
