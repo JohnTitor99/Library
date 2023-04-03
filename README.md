@@ -33,11 +33,12 @@ It's a training project that i've made at the beginning my way becoming a django
 
 ## Running the project
 
-There already is 1 created account, so if you want to check it out without registration:
-login: admin
-password: adminadmin
+There is 1 created account already, so if you want to check it out without registration:
 
-At first, you should have installed Python on your computer. Not necessary, but advised to create a virtual environment, so you store your projects dependecies apart for avoiding conflicts beetwen packages.
+*login*: **admin**
+*password*: **adminadmin**
+
+At first, you should have installed Python on your computer. Not necessary, but advised to create a virtual environment, so you store your project's dependecies apart for avoiding conflicts beetwen packages.
 ```shell
 pip install virtualenv
 ```
